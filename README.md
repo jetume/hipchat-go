@@ -16,7 +16,11 @@ import "github.com/jetume/hipchat-go/hipchat"
 Build a new client, then use the `client.Room` service to spam all the rooms you have access to (not recommended):
 
 ```go
-c := hipchat.NewClient("<your AuthToken here>")
+clientOpt := hipchat.ClientOptions{
+	AuthToken: "<your AuthToken here>",
+	BaseURI: "<your custom api base uril here>",
+}
+c := hipchat.NewClient(&clientOpt)
 
 opt := &hipchat.RoomsListOptions{IncludePrivate:  true, IncludeArchived: true}
 rooms, _, err := c.Room.List(opt)
