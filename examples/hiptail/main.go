@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/tbruyelle/hipchat-go/hipchat"
+	"github.com/jetume/hipchat-go/hipchat"
 )
 
 const (

@@ -26,7 +26,10 @@ func setup() {
 	server = httptest.NewServer(mux)
 
 	// github client configured to use test server
-	client = NewClient("AuthToken")
+	options := ClientOptions{
+		AuthToken: "AuthToken",
+	}
+	client = NewClient(&options)
 	url, _ := url.Parse(server.URL)
 	client.BaseURL = url
 }
@@ -65,7 +68,11 @@ func testHeader(t *testing.T, r *http.Request, header string, want string) {
 func TestNewClient(t *testing.T) {
 	authToken := "AuthToken"
 
-	c := NewClient(authToken)
+	options := ClientOptions{
+		AuthToken: authToken,
+	}
+
+	c := NewClient(&options)
 
 	if c.authToken != authToken {
 		t.Errorf("NewClient authToken %s, want %s", c.authToken, authToken)
@@ -79,7 +86,11 @@ func TestNewClient(t *testing.T) {
 }
 
 func TestSetHTTPClient(t *testing.T) {
-	c := NewClient("AuthToken")
+	options := ClientOptions{
+		AuthToken: "AuthToken",
+	}
+
+	c := NewClient(&options)
 
 	httpClient := new(http.Client)
 	c.SetHTTPClient(httpClient)
@@ -96,7 +107,11 @@ func (c customHTTPClient) Do(*http.Request) (*http.Response, error) {
 }
 
 func TestSetCustomHTTPClient(t *testing.T) {
-	c := NewClient("AuthToken")
+	options := ClientOptions{
+		AuthToken: "AuthToken",
+	}
+
+	c := NewClient(&options)
 
 	httpClient := new(customHTTPClient)
 	c.SetHTTPClient(httpClient)
@@ -107,7 +122,11 @@ func TestSetCustomHTTPClient(t *testing.T) {
 }
 
 func TestSetHTTPClient_NilHTTPClient(t *testing.T) {
-	c := NewClient("AuthToken")
+	options := ClientOptions{
+		AuthToken: "AuthToken",
+	}
+
+	c := NewClient(&options)
 
 	c.SetHTTPClient(nil)
 
@@ -117,7 +136,11 @@ func TestSetHTTPClient_NilHTTPClient(t *testing.T) {
 }
 
 func TestNewRequest(t *testing.T) {
-	c := NewClient("AuthToken")
+	options := ClientOptions{
+		AuthToken: "AuthToken",
+	}
+
+	c := NewClient(&options)
 
 	inURL, outURL := "foo", defaultBaseURL+"foo?max-results=100&start-index=1"
 	opt := &ListOptions{StartIndex: 1, MaxResults: 100}
@@ -144,7 +167,11 @@ func TestNewRequest(t *testing.T) {
 func TestNewRequest_AuthTestEnabled(t *testing.T) {
 	AuthTest = true
 	defer func() { AuthTest = false }()
-	c := NewClient("AuthToken")
+	options := ClientOptions{
+		AuthToken: "AuthToken",
+	}
+
+	c := NewClient(&options)
 
 	inURL, outURL := "foo", defaultBaseURL+"foo?auth_test=true"
 	r, _ := c.NewRequest("GET", inURL, nil, nil)

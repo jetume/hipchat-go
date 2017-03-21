@@ -28,6 +28,12 @@ const (
 	defaultBaseURL = "https://api.hipchat.com/v2/"
 )
 
+// ClientOptions defines the options users can pass to configure NewClient
+type ClientOptions struct {
+	BaseURI   string
+	AuthToken string
+}
+
 // HTTPClient is an interface that allows overriding the http behavior
 // by providing custom http clients
 type HTTPClient interface {
@@ -170,8 +176,16 @@ var RateLimitRetryPolicy = DefaultRateLimitRetryPolicy
 
 // NewClient returns a new HipChat API client. You must provide a valid
 // AuthToken retrieved from your HipChat account.
-func NewClient(authToken string) *Client {
-	baseURL, err := url.Parse(defaultBaseURL)
+func NewClient(options *ClientOptions) *Client {
+	baseUri := options.BaseURI
+	if baseUri == "" {
+		baseUri = defaultBaseURL
+	}
+	authToken := options.AuthToken
+	if authToken == "" {
+		panic(errors.New("AuthToken empty"))
+	}
+	baseURL, err := url.Parse(baseUri)
 	if err != nil {
 		panic(err)
 	}

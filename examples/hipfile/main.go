@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/tbruyelle/hipchat-go/hipchat"
+	"github.com/jetume/hipchat-go/hipchat"
 )
 
 var (
@@ -22,7 +22,11 @@ func main() {
 		flag.PrintDefaults()
 		return
 	}
-	c := hipchat.NewClient(*token)
+
+	options := hipchat.ClientOptions{
+		AuthToken: token,
+	}
+	c := hipchat.NewClient(&options)
 
 	shareFileRq := &hipchat.ShareFileRequest{Path: *path, Message: *message, Filename: *filename}
 

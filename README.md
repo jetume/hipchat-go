@@ -2,7 +2,7 @@
 
 Go client library for the [HipChat API v2](https://www.hipchat.com/docs/apiv2).
 
-[![GoDoc](https://godoc.org/github.com/tbruyelle/hipchat-go/hipchat?status.svg)](https://godoc.org/github.com/tbruyelle/hipchat-go/hipchat)
+[![GoDoc](https://godoc.org/github.com/jetume/hipchat-go/hipchat?status.svg)](https://godoc.org/github.com/jetume/hipchat-go/hipchat)
 [![Build Status](https://travis-ci.org/tbruyelle/hipchat-go.svg??branch=master)](https://travis-ci.org/tbruyelle/hipchat-go)
 
 Currently only a small part of the API is implemented, so pull requests are welcome.
@@ -10,7 +10,7 @@ Currently only a small part of the API is implemented, so pull requests are welc
 ### Usage
 
 ```go
-import "github.com/tbruyelle/hipchat-go/hipchat"
+import "github.com/jetume/hipchat-go/hipchat"
 ```
 
 Build a new client, then use the `client.Room` service to spam all the rooms you have access to (not recommended):

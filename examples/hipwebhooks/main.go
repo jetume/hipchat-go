@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/tbruyelle/hipchat-go/hipchat"
+	"github.com/jetume/hipchat-go/hipchat"
 )
 
 var (
