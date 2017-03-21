@@ -18,7 +18,7 @@ Build a new client, then use the `client.Room` service to spam all the rooms you
 ```go
 clientOpt := hipchat.ClientOptions{
 	AuthToken: "<your AuthToken here>",
-	BaseURI: "<your custom api base uril here>",
+	BaseURI: "<your custom api base uri here>",
 }
 c := hipchat.NewClient(&clientOpt)
 
